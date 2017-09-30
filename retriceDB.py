@@ -16,6 +16,7 @@ client = MongoClient(host="localhost", port=27017)
 print('\n')
 
 print("*******"*10)
+# 以列表的形式返回server端存在的所有的数据库名称
 allDatabasesName = client.database_names()
 print("当前server共存在 {0:>+2,d} 个数据库：{1}".format(len(allDatabasesName), allDatabasesName))
 
@@ -24,6 +25,7 @@ for database in allDatabasesName:
         pass
     else:
         db = client.get_database(database)
+        # 返回该db中包含的所有集合的名称
         collectionsName = db.collection_names(include_system_collections=False)
         print("-------"*10)
         print("数据库 {0} ，包含 {1:>+2,d} 个集合：{2}".format(db.name, len(collectionsName), collectionsName))
